@@ -13,6 +13,7 @@ const Index = () => {
   const [material, setMaterial] = useState('pla');
   const [infill, setInfill] = useState(20);
   const [quality, setQuality] = useState('standard');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const calculatePrice = () => {
     const basePricePerCm3 = {
@@ -79,21 +80,79 @@ const Index = () => {
             <Button onClick={() => scrollToSection('contacts')} className="hidden md:flex">
               Связаться
             </Button>
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+              className="md:hidden p-2"
+              aria-label="Toggle menu"
+            >
+              <Icon name={mobileMenuOpen ? 'X' : 'Menu'} size={24} className="text-gray-700" />
+            </button>
           </div>
         </div>
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-gray-200 bg-white">
+            <nav className="container mx-auto px-4 py-4 flex flex-col gap-3">
+              <button 
+                onClick={() => { scrollToSection('hero'); setMobileMenuOpen(false); }} 
+                className="text-left text-gray-700 hover:text-primary transition-colors font-medium py-2"
+              >
+                Главная
+              </button>
+              <button 
+                onClick={() => { scrollToSection('services'); setMobileMenuOpen(false); }} 
+                className="text-left text-gray-700 hover:text-primary transition-colors font-medium py-2"
+              >
+                Услуги
+              </button>
+              <button 
+                onClick={() => { scrollToSection('portfolio'); setMobileMenuOpen(false); }} 
+                className="text-left text-gray-700 hover:text-primary transition-colors font-medium py-2"
+              >
+                Портфолио
+              </button>
+              <button 
+                onClick={() => { scrollToSection('tech'); setMobileMenuOpen(false); }} 
+                className="text-left text-gray-700 hover:text-primary transition-colors font-medium py-2"
+              >
+                Технологии
+              </button>
+              <button 
+                onClick={() => { scrollToSection('calculator'); setMobileMenuOpen(false); }} 
+                className="text-left text-gray-700 hover:text-primary transition-colors font-medium py-2"
+              >
+                Калькулятор
+              </button>
+              <button 
+                onClick={() => { scrollToSection('pricing'); setMobileMenuOpen(false); }} 
+                className="text-left text-gray-700 hover:text-primary transition-colors font-medium py-2"
+              >
+                Прайс
+              </button>
+              <button 
+                onClick={() => { scrollToSection('contacts'); setMobileMenuOpen(false); }} 
+                className="text-left text-gray-700 hover:text-primary transition-colors font-medium py-2"
+              >
+                Контакты
+              </button>
+              <Button onClick={() => { scrollToSection('contacts'); setMobileMenuOpen(false); }} className="mt-2">
+                Связаться
+              </Button>
+            </nav>
+          </div>
+        )}
       </header>
 
       <section id="hero" className="pt-32 pb-20 px-4 bg-gradient-to-br from-white via-orange-50/30 to-white">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
                 Превращаем идеи в <span className="text-primary">реальность</span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
+              <p className="text-lg md:text-xl text-gray-600 mb-8">
                 Профессиональная 3D-печать любой сложности. От прототипа до серийного производства.
               </p>
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" onClick={() => scrollToSection('calculator')}>
                   Рассчитать стоимость
                   <Icon name="Calculator" className="ml-2" size={20} />
@@ -102,22 +161,22 @@ const Index = () => {
                   Наши работы
                 </Button>
               </div>
-              <div className="grid grid-cols-3 gap-6 mt-12">
+              <div className="grid grid-cols-3 gap-4 sm:gap-6 mt-12">
                 <div>
-                  <div className="text-3xl font-bold text-primary">500+</div>
-                  <div className="text-sm text-gray-600">Проектов</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-primary">500+</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Проектов</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-primary">10+</div>
-                  <div className="text-sm text-gray-600">Технологий</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-primary">10+</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Технологий</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-primary">24/7</div>
-                  <div className="text-sm text-gray-600">Поддержка</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-primary">24/7</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Поддержка</div>
                 </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative hidden md:block">
               <div className="aspect-square bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl flex items-center justify-center">
                 <Icon name="Box" size={200} className="text-primary/40" />
               </div>
@@ -129,8 +188,8 @@ const Index = () => {
       <section id="services" className="py-20 px-4 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Наши услуги</h2>
-            <p className="text-xl text-gray-600">Полный цикл работ от моделирования до постобработки</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Наши услуги</h2>
+            <p className="text-lg md:text-xl text-gray-600">Полный цикл работ от моделирования до постобработки</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -182,18 +241,18 @@ const Index = () => {
       <section id="portfolio" className="py-20 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Портфолио</h2>
-            <p className="text-xl text-gray-600">Реализованные проекты наших клиентов</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Портфолио</h2>
+            <p className="text-lg md:text-xl text-gray-600">Реализованные проекты наших клиентов</p>
           </div>
           <Tabs defaultValue="all" className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-4 mb-12">
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 sm:grid-cols-4 mb-12">
               <TabsTrigger value="all">Все</TabsTrigger>
               <TabsTrigger value="prototype">Прототипы</TabsTrigger>
               <TabsTrigger value="production">Серии</TabsTrigger>
               <TabsTrigger value="art">Арт-объекты</TabsTrigger>
             </TabsList>
             <TabsContent value="all">
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {[1, 2, 3, 4, 5, 6].map((item) => (
                   <Card key={item} className="overflow-hidden group cursor-pointer">
                     <div className="aspect-square bg-gradient-to-br from-primary/20 to-secondary/20 relative overflow-hidden">
@@ -219,8 +278,8 @@ const Index = () => {
       <section id="tech" className="py-20 px-4 bg-gray-900 text-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Технологии и материалы</h2>
-            <p className="text-xl text-gray-400">Современное оборудование для любых задач</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Технологии и материалы</h2>
+            <p className="text-lg md:text-xl text-gray-400">Современное оборудование для любых задач</p>
           </div>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
@@ -270,8 +329,8 @@ const Index = () => {
       <section id="calculator" className="py-20 px-4 bg-gradient-to-br from-orange-50 to-white">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Калькулятор стоимости</h2>
-            <p className="text-xl text-gray-600">Рассчитайте стоимость 3D-печати вашей модели</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Калькулятор стоимости</h2>
+            <p className="text-lg md:text-xl text-gray-600">Рассчитайте стоимость 3D-печати вашей модели</p>
           </div>
           <Card className="border-2">
             <CardContent className="p-8">
@@ -325,7 +384,7 @@ const Index = () => {
 
               <div className="mb-8">
                 <Label className="text-lg mb-3 block">Качество печати</Label>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
                     { value: 'draft', label: 'Черновое', desc: '0.3мм' },
                     { value: 'standard', label: 'Стандарт', desc: '0.2мм' },
@@ -348,14 +407,14 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-primary to-orange-600 rounded-xl p-8 text-white">
+              <div className="bg-gradient-to-r from-primary to-orange-600 rounded-xl p-6 md:p-8 text-white">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-lg mb-2">Примерная стоимость</div>
-                    <div className="text-5xl font-bold">{calculatePrice()} ₽</div>
-                    <div className="text-sm mt-2 opacity-90">Без учета постобработки</div>
+                    <div className="text-base md:text-lg mb-2">Примерная стоимость</div>
+                    <div className="text-3xl sm:text-4xl md:text-5xl font-bold">{calculatePrice()} ₽</div>
+                    <div className="text-xs md:text-sm mt-2 opacity-90">Без учета постобработки</div>
                   </div>
-                  <Icon name="Calculator" size={80} className="opacity-20" />
+                  <Icon name="Calculator" size={60} className="opacity-20 hidden sm:block" />
                 </div>
               </div>
 
@@ -371,10 +430,10 @@ const Index = () => {
       <section id="pricing" className="py-20 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Прайс-лист</h2>
-            <p className="text-xl text-gray-600">Базовые цены на наши услуги</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Прайс-лист</h2>
+            <p className="text-lg md:text-xl text-gray-600">Базовые цены на наши услуги</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
             {[
               {
                 name: 'Стандарт',
@@ -439,8 +498,8 @@ const Index = () => {
       <section id="contacts" className="py-20 px-4 bg-gray-900 text-white">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Свяжитесь с нами</h2>
-            <p className="text-xl text-gray-400">Готовы обсудить ваш проект</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Свяжитесь с нами</h2>
+            <p className="text-lg md:text-xl text-gray-400">Готовы обсудить ваш проект</p>
           </div>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
